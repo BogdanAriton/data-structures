@@ -94,7 +94,7 @@ class linkList():
             temp = current # temp holds the new elements
             current = nextElem # replace element with the next one in the original list
 
-        self.head = prevElem
+        self.head = None
 
 def printLList(lList):
     if lList.isEmpty():
