@@ -1,56 +1,83 @@
+"""
+    Vrem gasim ce lagatura exista intre doua aeoroporturi
+
+    Trebuie gasim o modalitate de a reprezenta graful
+    Adjacency List
+
+    A - B, G
+    B - C
+    C - E
+    E - D
+    D - F
+    F - A, H, I
+    G - H
+    H - I
+    I - E
+
+Avem niste Noduri care se leaga de alte noduri
+
+**kargs = pack de parametri care se unpack intr-un dictionar
+*args = pack de param care se unpack intr-o lista
+
+"""
+from queue import LifoQueue
+
 class Node:
-    def __init__(self, data) -> None:
-        __data = data
-        nodesList = { '', Node }
+    def __init__(self, name):
+        self.name = name
+        self.dest = {}
+
+    def addDest(self, **dest): # { dest: {B: 6, G: 5} }
+        for item in dest['dest']:
+            self.dest[item] = dest['dest'][item]
+
+def DFT(node, visited):
+    if visited.get(node):
+        return
     
+    print(node.name)
 
+    visited[node] = True
+    for nodes in node.dest:
+        DFT(nodes, visited)
 
 """
-adjacency matrix
-
-    [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-     1 2 3 4 5 6 7 8 9
-   1 0 1 0 0 0 1 1 0 1
-   2 1 0 1 0 0 0 0 1 0
-   3 0 1 0 0 0 0 0 0 0
-   4 0 1 0 0 0 0 0 0 0
-   5 0 1 0 0 0 0 0 0 0
-   6 0 1 0 0 0 0 0 0 0
-   7 0 1 0 0 0 0 0 0 0
-   8 0 1 0 0 0 0 0 0 0
-   9 0 1 0 0 0 0 0 0 0 
-
-   a = [][]
-      a[5][2] - O(1) - constant time
-      Space complexity - O(n^2)
-
-adjacency list
-    1 -> [2][][][][] - O(n) - linear time
-    2 -> [1][]
+    node = a
+    stack = [a: true]
+    tempNode = B
+    stack = [a: true, b: true]
+    node = B
 
 """
 
-"""
-Applicabilitate:
+        
+A = Node("Otopeni")
+B = Node("frankfurt")
+C = Node("Los Angeles")
+D = Node("Cluj")
+E = Node("Brasov")
+F = Node("Londra")
+G = Node("New York")
+H = Node("Paris")
+I = Node("Dubai")
 
-     1 2 3 4 5 6 7 8
-   1 T T 0 0 0 0 0 0
-   2 0 x 0 0 0 0 0 0
-   3 0 x x 0 0 0 0 0
-   4 0 0 0 0 0 0 0 0
-   5 0 0 0 0 0 0 0 0
-   6 0 0 0 0 0 0 0 0
-   7 0 0 0 0 0 0 0 0
-   8 0 0 0 0 0 0 0 0
+A.addDest(dest = {B: 6, G: 5})
+B.addDest(dest = {C: 5})
+C.addDest(dest = {E: 3})
+D.addDest(dest = {F:2, B:1})
+E.addDest(dest = {D: 2})
+F.addDest(dest = {A: 2, H:3, I:3})
+H.addDest(dest = {I: 4})
+G.addDest(dest = {H: 4})
+I.addDest(dest = {E: 2})
 
-   Casuta - nodul:
-    Info:
-        Atacata - de cine - un arbore the atacuri
-        Next move - este un arbore
+visited = {}
+DFT(A, visited)
+#print("Distanta de la ", A.name, " la ", B.name, " este: ", A.dest[B])
 
+# Depth First Travesal - Parcurgere prin adancime
+# stack - LIFO unde intra fiecare nod
+# ne facem un dictionar pentru noduri vizitate
+# facem munca pana cand stack-ul este gol
+# Breath First Traversal - Parcurgere prin invecinare
 
-    words: banana
-    
-
-"""
