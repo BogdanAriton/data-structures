@@ -11,11 +11,13 @@ BT => Binary Search Tree = BST
    => Heap Search
 
 BST: O(longN)
- 7 4 3 9 8 12 13
+ 7 4 3 9 8 12 13 10
+
             7
-        4       9
-      3       8   12
-                     13
+        4      10
+      3      9   12
+           8        13
+
 Pre-Order
     visit
     go left
@@ -50,8 +52,8 @@ class BTree:
         if self.root == None:
             self.root = newNode
             return
-        current = self.root
 
+        current = self.root
         while current != None:
             if data < current.data:
                 if current.left != None:
@@ -66,6 +68,17 @@ class BTree:
                 else:
                     current.right = newNode
                     break
+
+    def search(self, data):
+        current = self.root
+        while current != None:
+            if data == current.data:
+                return True
+            elif data < current.data:
+                current = current.left
+            else:
+                current = current.right
+        return False
 
     def InOder(self):
         self.InOrderRec(self.root)
@@ -89,4 +102,7 @@ bst.addNode(12)
 bst.addNode(13)
 
 bst.InOder()
+
+print(bst.search(19))
+print(bst.search(8))
 
